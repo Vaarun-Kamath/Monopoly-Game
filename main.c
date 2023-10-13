@@ -535,7 +535,7 @@ int attempt_exitjail(int plyr_id) {
     int offset=0;
     gotoxy(126,20);printf("You are currently in Jail....");
     gotoxy(126,23);printf("Press P to Pay Police 500R and get out");
-    exit_monopoly();
+    //exit_monopoly();
     gotoxy(126,24);printf("Press R to Roll die, if you get a 6 you are set free");
     gotoxy(126,25);
     while(outer_flag==0 && (choice=getch())!=EOF){
@@ -555,7 +555,7 @@ int attempt_exitjail(int plyr_id) {
                         BOARD_RESET;
                         gotoxy(126,21);printf("You dont have enough money to pay for Police Fee, you have to sell owned properties to pay");
                         gotoxy(126,22);printf("OR");
-                        exit_monopoly();
+                        //exit_monopoly();
                         gotoxy(126,23);printf("Roll a 6 to get out");
                         gotoxy(126,24);printf("Press S to sell owned property");
                         gotoxy(126,25);printf("Press R to roll dice");
@@ -773,20 +773,31 @@ void game_start(){
         }
         jail_bypass:
         gotoxy(126,19);print_name_wclr(current_player);
-        exit_monopoly();
+        //exit_monopoly();
         printf(" Press R to Roll the dice...");
-        while((st_inp=getch())!=EOF && dice_flag==0){
-            if(st_inp=='r') {
+        printf(" Press q to exit...");
+        while((st_inp=getch())!=EOF && dice_flag==0)
+        {
+            if(st_inp=='r') 
+            {
                 dice_num=roll_dice();
                 gotoxy(126,21);printf("Dice: %d",dice_num);dice_flag=1;gotoxy(126,21);
-                if(dice_num==6) {
+                if(dice_num==6) 
+                {
                     gotoxy(126,23);print_name_wclr(current_player);printf(" + 50");
                     players[current_player].money+=50;
                 }
+            }
+            else if(st_inp=='q')
+            {
+                printf("trial\n");
+                fflush(stdout);
+                exit(0);
+                //exit_monopoly();
+            }
                 gotoxy(126,24);
                 Sleep(550);
                 break;
-            }
         }
         Sleep(1000);
         move_plyr(current_player,dice_num,1);
