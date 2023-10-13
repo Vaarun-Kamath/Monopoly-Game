@@ -138,63 +138,6 @@ int find_digits(int n)
     int counter=0;while(n!=0){n=n/10;counter++;}return counter;  
 } 
 
-void dice_visualise(int dice_num)
-{
-    if(dice_num== 1)
-    {
-        printf("\n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t -------  \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|       | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|   *   | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|       | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t -------  \n");
-    }
-    else if(dice_num== 2)
-    {
-        printf("\n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  -------  \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t | *     | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t |       | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t |     * | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  -------  \n");
-    }
-    else if(dice_num == 3)
-    {
-        printf("\n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  -------  \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t | *     | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t |   *   | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t |     * | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  -------  \n");
-    }
-    else if(dice_num == 4)
-    {
-        printf("\n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  -------  \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t | *   * | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t |       | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t | *   * | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  -------  \n");
-    }
-    else if(dice_num == 5)
-    {
-        printf("\n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  -------  \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t | *   * | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t |   *   | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t | *   * | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  -------  \n");
-    }
-    else if(dice_num == 6)
-    {
-        printf("\n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  -------  \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t | * * * | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t |       | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t | * * * | \n");
-        printf(" \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  -------  \n");
-    }
-}
 //Prints colour pallete on the right to select from
 void print_colors () {
     FILE* colour_pal;
@@ -641,9 +584,9 @@ int attempt_exitjail(int plyr_id) {
                     Sleep(170);
                     printf(".");
                 }
-                gotoxy(126,28);dice_visualise(die);
+                gotoxy(126,28);printf("Dice: %d",die);
                 Sleep(600);
-                if(die==6){
+                if(die==6) {
                     gotoxy(126,29);
                     printf("You got a 6!!, you are now set free...");
                     players[plyr_id].pos=4;
@@ -659,7 +602,6 @@ int attempt_exitjail(int plyr_id) {
         }
     }
 }
-
 
 int is_on_property(int plyr_id) {
     if(plyr_pos(plyr_id)!=0 && plyr_pos(plyr_id)!=4 && plyr_pos(plyr_id)!=8 && plyr_pos(plyr_id)!=11 && plyr_pos(plyr_id)!=15) 
@@ -785,7 +727,7 @@ void game_start(){
     int offset=0;
     int sell_offset=0;
     int rent_payment=0;
-   int chan_offset=0;
+    int chan_offset=0;
     int c_line=0;
     char chance_lines[150]; // _++_+_+_+_+__+_+_+_=-+-+_=_+_+-+-
     char plyr_statlines[40];
@@ -822,7 +764,7 @@ void game_start(){
         while((st_inp=getch())!=EOF && dice_flag==0){
             if(st_inp=='r') {
                 dice_num=roll_dice();
-                gotoxy(126,21);dice_visualise(dice_num);dice_flag=1;gotoxy(126,21);
+                gotoxy(126,21);printf("Dice: %d",dice_num);dice_flag=1;gotoxy(126,21);
                 if(dice_num==6) {
                     gotoxy(126,23);print_name_wclr(current_player);printf(" + 50");
                     players[current_player].money+=50;
@@ -1116,8 +1058,6 @@ void game_start(){
     CURSOR_RESET;
 }
 //Main fucntion
-
-
 int main() {
     startup();
     game_start();
