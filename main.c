@@ -58,6 +58,7 @@ const int jail_coord[2] = {12,42};
 int player_count=0;
 int current_player = 0;
 int num_gameover = 0;
+int gameIsRunning = 1;
 //Board Coordinate {x,y}
 int board_coord[16][2] = {
     {108,47},{84,47},{60,47},{36,47},
@@ -718,6 +719,20 @@ int startup() {
         return 1;
 }
 
+void handle_quit() {
+    char response;
+
+    printf("Are you sure you want to quit? (Y/N): ");
+    scanf(" %c", &response); // Note the space before %c to consume the newline character
+
+    if (response == 'Y' || response == 'y') {
+        printf("Quitting the game. Goodbye!\n");
+        gameIsRunning = 0; // Set the game state to quit
+    } else {
+        printf("Resuming the game.\n");
+    }
+}
+
 //Game start
 void game_start(){
     clear();
@@ -1075,5 +1090,16 @@ void game_start(){
 int main() {
     startup();
     game_start();
+    char key;
+
+    // Game loop
+    while (gameIsRunning) {
+        key = getchar(); // Get user input
+        
+        // Check for quit shortcut (for example, pressing 'Q' key)
+        if (key == 'Q' || key == 'q') {
+            handle_quit();
+        }
+    }
     exit(1);
 }
