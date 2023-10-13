@@ -268,6 +268,7 @@ void move_plyr(int plyr_id,int pos_offset,int go_flag) {
     CURSOR_RESET;
 }
 
+
 //MOVES PLAYER BACKWARDS
 void move_plyr_back(int plyr_id,int pos_offset) {
     CURSOR_RESET;
@@ -374,6 +375,88 @@ void print_victory_screen(int plyr_id, int how) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),Terminal_NORMAL);
     gotoxy(0,62);
     exit(1);
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// Function to display the ASCII art representation of the dice based on the rolled number
+void displayDicedesign(int num) {
+    switch (num) {
+        case 1:
+            printf("  _______\n");
+            printf(" |       |\n");
+            printf(" |   *   |\n");
+            printf(" |       |\n");
+            printf("  -------\n");
+            break;
+        case 2:
+            printf("  _______\n");
+            printf(" | *     |\n");
+            printf(" |       |\n");
+            printf(" |     * |\n");
+            printf("  -------\n");
+            break;
+        case 3:
+            printf("  _______\n");
+            printf(" | *     |\n");
+            printf(" |   *   |\n");
+            printf(" |     * |\n");
+            printf("  -------\n");
+            break;
+        case 4:
+            printf("  _______\n");
+            printf(" | *   * |\n");
+            printf(" |       |\n");
+            printf(" | *   * |\n");
+            printf("  -------\n");
+            break;
+        case 5:
+            printf("  _______\n");
+            printf(" | *   * |\n");
+            printf(" |   *   |\n");
+            printf(" | *   * |\n");
+            printf("  -------\n");
+            break;
+        case 6:
+            printf("  _______\n");
+            printf(" | * * * |\n");
+            printf(" |       |\n");
+            printf(" | * * * |\n");
+            printf("  -------\n");
+            break;
+    }
+}
+
+int main() {
+    srand(time(NULL));  // Seed the random number generator with the current time
+
+    char roll;
+    int player1, player2;
+
+    do {
+        printf("Press 'R' to roll the dice (or 'Q' to quit): ");
+        scanf(" %c", &roll);
+
+        if (roll == 'R' || roll == 'r') {
+            player1 = (rand() % 6) + 1;  // Generate a random number from 1 to 6
+            player2 = (rand() % 6) + 1;  // Generate a random number from 1 to 6
+
+            printf("Player 1 rolled: %d\n", player1);
+            displayDice(player1);
+            displayDicedesign(player1);
+
+            printf("Player 2 rolled: %d\n", player2);
+            displayDicedesign(player2);
+        } else if (roll == 'Q' || roll == 'q') {
+            break;
+        } else {
+            printf("Invalid input. Press 'R' to roll or 'Q' to quit.\n");
+        }
+    } while (1);
+
+    return 0;
 }
 
 //Checks if Winner has been Declared
