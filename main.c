@@ -104,6 +104,15 @@ struct playerprop{
     int reset_flag; // Flag value to check if property has been reset or not
 }players[4]={{"",0,-1,START_MONEY,0,0,0,0,{},0,0,0},{"",0,-1,START_MONEY,0,0,0,0,{},0,0,0},{"",0,-1,START_MONEY,0,0,0,0,{},0,0,0},{"",0,-1,START_MONEY,0,0,0,0,{},0,0,0}};
 
+//exit function
+void exit_monopoly()
+{
+    char tr;
+    tr=getch();
+    printf("Enter q to exit game and any other key to continue");
+    if(tr=='q')
+    exit(0);
+}
 //End screen after quiting or game over
 void end_screen_fun(){
     FILE* end_screen;
@@ -124,7 +133,7 @@ void end_screen_fun(){
 //Rolls DICE
 int roll_dice() {
     srand(time(NULL));
-    return ((rand()%6)+1);
+    return ((rand()%6)+1);  
 }
 //Gives Random number
 int rand_number(int max) {
@@ -526,6 +535,7 @@ int attempt_exitjail(int plyr_id) {
     int offset=0;
     gotoxy(126,20);printf("You are currently in Jail....");
     gotoxy(126,23);printf("Press P to Pay Police 500R and get out");
+    //exit_monopoly();
     gotoxy(126,24);printf("Press R to Roll die, if you get a 6 you are set free");
     gotoxy(126,25);
     while(outer_flag==0 && (choice=getch())!=EOF){
@@ -545,6 +555,7 @@ int attempt_exitjail(int plyr_id) {
                         BOARD_RESET;
                         gotoxy(126,21);printf("You dont have enough money to pay for Police Fee, you have to sell owned properties to pay");
                         gotoxy(126,22);printf("OR");
+                        //exit_monopoly();
                         gotoxy(126,23);printf("Roll a 6 to get out");
                         gotoxy(126,24);printf("Press S to sell owned property");
                         gotoxy(126,25);printf("Press R to roll dice");
@@ -560,7 +571,8 @@ int attempt_exitjail(int plyr_id) {
                                         gotoxy(126,20+offset);print_name_wclr(plyr_id);printf(" - %dR",JAIL_FEE);
                                         players[plyr_id].pos=4;
                                         Sleep(1300);
-                                        gotoxy(126,30);printf("Press any key to continue...");getch();
+                                        gotoxy(126,30);printf("Press Q to exit or any other key to continue...");getch();
+
                                         inner_flag = 1;
                                         break;
                                     }
@@ -760,19 +772,32 @@ void game_start(){
             goto next;
         }
         jail_bypass:
-        gotoxy(126,19);print_name_wclr(current_player);printf(" Press R to Roll the dice...");
-        while((st_inp=getch())!=EOF && dice_flag==0){
-            if(st_inp=='r') {
+        gotoxy(126,19);print_name_wclr(current_player);
+        //exit_monopoly();
+        printf(" Press R to Roll the dice...");
+        printf(" Press q to exit...");
+        while((st_inp=getch())!=EOF && dice_flag==0)
+        {
+            if(st_inp=='r') 
+            {
                 dice_num=roll_dice();
                 gotoxy(126,21);printf("Dice: %d",dice_num);dice_flag=1;gotoxy(126,21);
-                if(dice_num==6) {
+                if(dice_num==6) 
+                {
                     gotoxy(126,23);print_name_wclr(current_player);printf(" + 50");
                     players[current_player].money+=50;
                 }
+            }
+            else if(st_inp=='q')
+            {
+                printf("trial\n");
+                fflush(stdout);
+                exit(0);
+                //exit_monopoly();
+            }
                 gotoxy(126,24);
                 Sleep(550);
                 break;
-            }
         }
         Sleep(1000);
         move_plyr(current_player,dice_num,1);
