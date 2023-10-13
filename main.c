@@ -29,7 +29,7 @@
 #define Terminal_Purple 95
 #define Terminal_Cyan 63
 #define Terminal_NORMAL 7
-//NAMES OF PROPERTIES
+//props
 #define Balt_avan  "Baltic Avenue"
 #define Read_rail  "Bond Street"
 #define Verm_avan  "Vermonto Avenue"
@@ -90,7 +90,7 @@ FILE* chance_fp;
 
 //Structure for each player
 struct playerprop{
-    char name[10];// Name of user {Default= Empty String}
+    char name[9];// Name of user {Default= Empty String}
     int name_len; //Length of the name of the user {Default=0}
     int colour; //Colour of choice of user (Colour id) {Default=-1}->[as colour starts from 0]
     int money; //How much money the user has {Default=1000}
