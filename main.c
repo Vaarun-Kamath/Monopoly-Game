@@ -429,7 +429,7 @@ void displayDicedesign(int num) {
     }
 }
 
-int main() {
+int Dicedesignnumber() {
     srand(time(NULL));  // Seed the random number generator with the current time
 
     char roll;
